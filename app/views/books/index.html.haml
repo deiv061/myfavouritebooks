@@ -1,0 +1,29 @@
+-#  This file is app/views/books/index.html.haml
+%h1 All Books
+
+ 
+= form_tag books_path, :method => :get, :id => 'genre_form' do
+  = hidden_field_tag "title_sort", true if @title_header
+  = hidden_field_tag ":publish_date_sort", true if @date_header
+  Include:
+  - @all_genres.each do |genre|
+    = genre
+    = check_box_tag "genres[#{genre}]", 1, @selected_genres.include?(genre), :id => "genres_#{genre}"
+  = submit_tag 'Refresh', :id => 'genres_submit'
+
+%table#books
+  %thead
+    %tr
+      %th{:class => @title_header}= link_to 'Book Title', books_path(:sort => 'title'), :id => 'title_header'
+      %th{:class => @genre_header}= link_to 'Genre', books_path(:sort => 'genre'), :id => 'genre_header'
+      %th{:class => @date_header}= link_to 'Publish Date', books_path(:sort => 'publish_date'), :id => 'publish_date_header'
+      %th More Info
+  %tbody
+    - @books.each do |book|
+      %tr
+        %td= book.title 
+        %td= book.genre
+        %td= book.publish_date.strftime("%B %d, %Y")
+        %td= link_to "More about #{book.title}", book_path(book)
+-# add to end of index.html.haml
+= link_to 'Add new book', new_book_path

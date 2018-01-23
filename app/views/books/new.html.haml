@@ -1,0 +1,23 @@
+%h2 Create New Book
+ 
+= form_tag books_path, :method => :post do
+ 
+  = label :book, :title, 'Title'
+  = text_field :book, :title
+ 
+  = label :book, :genre, 'Genre'
+  = select :book, :genre, ['Fiction','Drama','Adventure','Romance','Mystery', 'Horror']
+ 
+  = label :book, :publish_date, 'Published On'
+  = date_select :book, :publish_date
+  
+  = label :book, :isbn_number, 'ISBN Number'
+  = text_field :book, :isbn_number
+  
+  = label :book, :description, 'Description'
+  = text_field :book, :description
+  
+  = label :book, :author, 'Author'
+  = text_field :book, :author
+ 
+  = submit_tag 'Save Changes'

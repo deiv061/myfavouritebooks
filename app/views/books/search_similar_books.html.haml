@@ -1,0 +1,18 @@
+%h1 Similar books to #{@book.title}
+
+%table#similar_books
+  %thead
+    %tr
+      %th Book Title
+      %th Genre
+      %th Publish Date
+      %th Author
+      %th More Info
+  %tbody
+    - @books.each do |book|
+      %tr
+        %td= book.title 
+        %td= book.genre
+        %td= book.publish_date.strftime("%B %d, %Y")
+        %td= book.author
+        %td= link_to "More about #{book.title}", book_path(book)
